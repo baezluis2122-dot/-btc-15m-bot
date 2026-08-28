@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BTC 15M Signal Bot</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #111827;
+  color: white;
+  text-align: center;
+}
+
+.container {
+  max-width: 500px;
+  margin: auto;
+  padding: 25px 18px;
+}
+
+h1 {
+  margin-bottom: 5px;
+}
+
+.subtitle {
+  color: #9ca3af;
+  margin-bottom: 25px;
+}
+
+.card {
+  background: #1f2937;
+  border-radius: 18px;
+  padding: 25px;
+  margin-bottom: 18px;
+}
+
+.price {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.signal {
+  font-size: 42px;
+  font-weight: bold;
+  margin: 20px 0;
+}
+
+.up {
+  color: #22c55e;
+}
+
+.down {
+  color: #ef4444;
+}
+
+.wait {
+  color: #facc15;
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+  margin: 12px 0;
+  color: #d1d5db;
+}
+
+button {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 12px;
+  background: #2563eb;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🤖 BTC 15M SIGNAL BOT</h1>
+
+<div class="subtitle">
+Filtro de señales
+</div>
+
+<div class="card">
+
+<div>BTC</div>
+
+<div class="price" id="price">
+Cargando...
+</div>
+
+<div class="signal wait" id="signal">
+⚪ NO ENTRAR
+</div>
+
+<div class="info">
+<span>Confianza</span>
+<span id="confidence">--%</span>
+</div>
+
+<div class="info">
+<span>Tiempo</span>
+<span id="time">15:00</span>
+</div>
+
+<div class="info">
+<span>Tendencia 15M</span>
+<span id="trend15">--</span>
+</div>
+
+<div class="info">
+<span>Tendencia 5M</span>
+<span id="trend5">--</span>
+</div>
+
+</div>
+
+<button onclick="analyze()">
+🔄 ANALIZAR BTC
+</button>
+
+</div>
+
+<script>
+
+function analyze() {
+
+  const signals = ["UP", "DOWN", "NO ENTRAR"];
+  const signal = signals[Math.floor(Math.random() * signals.length)];
+
+  const confidence = Math.floor(Math.random() * 20) + 60;
+
+  const signalBox = document.getElementById("signal");
+  const confidenceBox = document.getElementById("confidence");
+
+  confidenceBox.innerText = confidence + "%";
+
+  signalBox.className = "signal";
+
+  if (signal === "UP") {
+    signalBox.innerText = "🟢 UP";
+    signalBox.classList.add("up");
+  }
+
+  else if (signal === "DOWN") {
+    signalBox.innerText = "🔴 DOWN";
+    signalBox.classList.add("down");
+  }
+
+  else {
+    signalBox.innerText = "⚪ NO ENTRAR";
+    signalBox.classList.add("wait");
+  }
+
+  document.getElementById("trend15").innerText =
+    signal === "UP" ? "Alcista ↗️" :
+    signal === "DOWN" ? "Bajista ↘️" : "Neutral";
+
+  document.getElementById("trend5").innerText =
+    signal === "UP" ? "Alcista ↗️" :
+    signal === "DOWN" ? "Bajista ↘️" : "Neutral";
+}
+
+</script>
+
+</body>
+</html>
