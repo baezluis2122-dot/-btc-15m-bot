@@ -1,1 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BTC Signal Bot</title>
 
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #111827;
+      color: white;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 25px 15px;
+    }
+
+    h1 {
+      margin-bottom: 5px;
+    }
+
+    .subtitle {
+      color: #9ca3af;
+      margin-bottom: 25px;
+    }
+
+    .card {
+      background: #1f2937;
+      border-radius: 18px;
+      padding: 25px;
+      margin-bottom: 20px;
+    }
+
+    .signal {
+      font-size: 42px;
+      font-weight: bold;
+      margin: 20px 0;
+    }
+
+    .neutral {
+      color: #facc15;
+    }
+
+    .up {
+      color: #22c55e;
+    }
+
+    .down {
+      color: #ef4444;
+    }
+
+    .info {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid #374151;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 12px;
+      background: #2563eb;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .warning {
+      font-size: 13px;
+      color: #9ca3af;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>₿ BTC Signal Bot</h1>
+    <div class="subtitle">Análisis de Bitcoin • 15 minutos</div>
+
+    <div class="card">
+
+      <div>SEÑAL ACTUAL</div>
+
+      <div id="signal" class="signal neutral">
+        ESPERANDO
+      </div>
+
+      <div class="info">
+        <span>RSI</span>
+        <span id="rsi">--</span>
+      </div>
+
+      <div class="info">
+        <span>Tendencia</span>
+        <span id="trend">--</span>
+      </div>
+
+      <div class="info">
+        <span>Volumen</span>
+        <span id="volume">--</span>
+      </div>
+
+      <div class="info">
+        <span>Última actualización</span>
+        <span id="time">--</span>
+      </div>
+
+    </div>
+
+    <button onclick="analyze()">
+      ANALIZAR BTC
+    </button>
+
+    <div class="warning">
+      ⚠️ Esto es una herramienta educativa y no garantiza ganancias.
+    </div>
+
+  </div>
+
+<script>
+
+function analyze() {
+
+  const rsi = Math.floor(Math.random() * 61) + 20;
+
+  let trend;
+  let signal;
+  let signalClass;
+
+  if (rsi >= 65) {
+
+    trend = "BAJISTA";
+    signal = "DOWN";
+    signalClass = "down";
+
+  } else if (rsi <= 35) {
+
+    trend = "ALCISTA";
+    signal = "UP";
+    signalClass = "up";
+
+  } else {
+
+    trend = "NEUTRAL";
+    signal = "ESPERAR";
+    signalClass = "neutral";
+
+  }
+
+  const volumeOptions = ["BAJO", "NORMAL", "ALTO"];
+  const volume =
+    volumeOptions[Math.floor(Math.random() * volumeOptions.length)];
+
+  const signalElement = document.getElementById("signal");
+
+  signalElement.textContent = signal;
+  signalElement.className = "signal " + signalClass;
+
+  document.getElementById("rsi").textContent = rsi;
+  document.getElementById("trend").textContent = trend;
+  document.getElementById("volume").textContent = volume;
+
+  const now = new Date();
+
+  document.getElementById("time").textContent =
+    now.toLocaleTimeString("es-PR");
+
+}
+
+</script>
+
+</body>
+</html>
